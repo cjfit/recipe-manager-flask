@@ -11,7 +11,7 @@ def main():
 
 @app.route('/list_dishes')
 def list_dishes():
-    return render_template('recipes.html', recipes=get_dishes())
+    return render_template('recipes.html', recipes=Recipe.dishes)
 
 
 @app.route('/add_dish', methods=["POST", "GET"])
@@ -19,7 +19,8 @@ def add_dish():
     if request.method == "GET":
         return render_template('add_recipe.html')
     if request.method == "POST":
-        Recipe(request.form['text'])
+        ingredients_list = request.form['ingredients'].split(',')
+        Recipe(request.form['text'], ingredients_list)
         flash(request.form['text'] + " added!")
         return render_template('index.html')
 
@@ -30,11 +31,5 @@ def update_dish(dish):
     flash(dish + " deleted!")
     return render_template('index.html')
 
-
-def get_dishes():
-    return [str(dish) for dish in Recipe.dishes]
-
-if __name__ == "__main__":
-    main()
 
 

@@ -1,4 +1,6 @@
 # recipe-manager-flask
+by cjfit
+
 A very basic CRUD app built with Python and Flask.
 
 ### Instructions
